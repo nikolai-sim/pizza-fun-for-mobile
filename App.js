@@ -104,7 +104,7 @@ export default function App() {
       {board? <Text>Guess the word</Text> : <Text> Press New Game to Start </Text>}
       
 
-      <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>
+      {counter === 0 ? <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{answer.join('')}</Text> : <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>}
      {answer1? <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> : <ActivityIndicator/>}
      
       <FlatList data={letters}
