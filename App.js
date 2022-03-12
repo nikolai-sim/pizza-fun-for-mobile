@@ -67,7 +67,7 @@ export default function App() {
     
     let newCount
     const guess = text
-    const update = check(guess , answer , board)
+    const update = check(guess.toLowerCase() , answer , board)
     const isWin = checkWin(update, answer.join(''))
     
     if (update === board) {
@@ -80,7 +80,7 @@ export default function App() {
     
     setBoard(update)
     setPastGuess(pastGuess + " " + guess)
-    setBox('')
+    setText('')
     if (isWin === true) {
       setCounter(100)
     }
