@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import {selectWord, check} from './lib'
+import {useState} from 'react'
 
 const words = [["t", "o", "m", "o", "r", "r", "o", "w"],
 ["y", "e", "s", "t", "e", "r", "d", "a", "y"],
@@ -16,6 +17,30 @@ const words = [["t", "o", "m", "o", "r", "r", "o", "w"],
 ["b", "o", "i", "s", "t", "e", "r", "o", "u", "s"]]
 
 export default function App() {
+
+  const renderImage = (count) => {
+    switch(count) {
+      case 7 :
+        return <Image source={require('./images/7.png')} style={{height: 200, width: 200}}/>
+      case 6 :
+        return <Image source={require('./images/6.png')} style={{height: 200, width: 200}}/>
+      case 5 :
+        return <Image source={require('./images/5.png')} style={{height: 200, width: 200}}/>
+      case 4 :
+        return <Image source={require('./images/4.png')} style={{height: 200, width: 200}}/>
+      case 3 :
+        return <Image source={require('./images/3.png')} style={{height: 200, width: 200}}/>
+      case 2 :
+        return <Image source={require('./images/2.png')} style={{height: 200, width: 200}}/>
+      case 1 :
+          return <Image source={require('./images/1.png')} style={{height: 200, width: 200}}/>
+      case 0 :
+          return <Image source={require('./images/0.png')} style={{height: 200, width: 200}}/>
+      default:
+        return <Image source={require('./images/7.png')} style={{height: 200, width: 200}}/>
+    }
+  }
+
   const answer = selectWord(words)
 
   let temp = []
@@ -29,12 +54,11 @@ export default function App() {
   const [board , setBoard] = useState(start)
   const [pastGuess, setPastGuess] = useState('')
   const [box, setBox] = useState('')
-  const [pizza, eatPizza] = useState('/images/7.png')
+  const [pizza, eatPizza] = useState('./images/7.png')
   const [counter, setCounter] = useState(7)
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = () => {
     
-    evt.preventDefault()
     let newCount
     const guess = evt.target[0].value
     const update = lib.check(guess , answer , board)
@@ -52,10 +76,10 @@ export default function App() {
     setPastGuess(pastGuess + " " + guess)
     setBox('')
     if (isWin === true) {
-      eatPizza('/images/win.png')
+      eatPizza('./images/win.png')
     }
     else {
-      eatPizza('/images/' + newCount.toString(10) + ".png")
+      eatPizza('./images/' + newCount.toString(10) + ".png")
     }
     
     
@@ -67,7 +91,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Pizza Fun for Mobile</Text>
+      {renderImage(counter)}
       <StatusBar style="auto" />
     </View>
   );
