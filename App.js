@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ActivityIndicator, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, View, Image, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
 import {selectWord, check, checkWin} from './lib'
 import {useState, useEffect} from 'react'
 import { getWords } from './apis/index'
@@ -47,6 +47,8 @@ export default function App() {
   }
   
   const start = temp.join('')
+
+  const [modalVisible, setModalVisible] = useState(false)
   
   const [answer, setAnswer] = useState(answer1)
   const [board , setBoard] = useState(start)
@@ -76,6 +78,7 @@ export default function App() {
     setText('')
     if (isWin === true) {
       setCounter(100)
+      setModalVisible(true)
     }
     else {
       eatPizza('./images/' + newCount.toString(10) + ".png")
@@ -96,6 +99,15 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      ></Modal>
       
       <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45}}>
       {renderImage(counter)}
