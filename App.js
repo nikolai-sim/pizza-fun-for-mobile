@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button, FlatList} from 'react-native';
 import {selectWord, check, checkWin} from './lib'
 import {useState} from 'react'
+
+import LetterButton from './components/LetterButton';
 
 const words = [["t", "o", "m", "o", "r", "r", "o", "w"],
 ["y", "e", "s", "t", "e", "r", "d", "a", "y"],
@@ -45,6 +47,10 @@ export default function App() {
 
   const letterArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
   'w', 'x', 'y', 'z']
+
+  const letters = [ {letter: 'a'}, {letter: 'b'}, {letter: 'c'}, {letter: 'd'}, {letter: 'e'}, {letter: 'f'}, {letter: 'g'}, {letter: 'h'}, 
+  {letter: 'i'}, {letter: 'j'}, {letter: 'k'}, {letter: 'l'}, {letter: 'm'}, {letter: 'n'}, {letter: 'o'}, {letter: 'p'}, {letter: 'q'}, {letter: 'r'},  
+  {letter: 's'}, {letter: 't'}, {letter: 'u'}, {letter: 'v'}, {letter: 'w'}, {letter: 'x'}, {letter: 'y'}, {letter: 'z'}]
 
   const answer1 = selectWord(words)
   console.log(answer1)
@@ -129,6 +135,9 @@ export default function App() {
         accessibilityLabel={letter}
         />)}
       </View> */}
+      <FlatList data={letters}
+        renderItem={({item}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit}/>)} 
+        numColumns={9}/>
       <Button
         onPress={newGame}
         title="New Game"
