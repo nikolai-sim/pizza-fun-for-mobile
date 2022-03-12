@@ -107,42 +107,25 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <TextInput
-        style={{height: 40}}
-        placeholder="Type your guess here!"
-        onChangeText={newText => setText(newText)}
-        defaultValue={text}
-        maxLength={1}
-      /> */}
+      
       <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45}}>
       {renderImage(counter)}
       </View>
-      <Text style={{color:'black'}}>Pizza Fun</Text>
-      {/* <Button
-        onPress={handleSubmit}
-        title="Submit"
-        color="#841584"
-        accessibilityLabel="submit guess"
-        /> */}
+      <Text style={{color:'black', letterSpacing: 3, fontSize: 16}}>PIZZA FUN</Text>
+      <Text>Guess the word</Text>
+      
 
       <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>
       <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text>
-      {/* <View style={{flexWrap: 'wrap', flex: 10, flexDirection: 'row' }}>
-      {letterArr.map( letter => <Button
-        onPress={() => {handleSubmit(letter.toLowerCase())}}
-        title={letter}
-        color="#841584"
-        accessibilityLabel={letter}
-        />)}
-      </View> */}
+     
       <FlatList data={letters}
-        renderItem={({item}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit}/>)} 
+        renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter + index}/>)} 
         numColumns={9}/>
       <View style={{marginBottom: 30}}>
         <Button
           onPress={newGame}
           title="New Game"
-          color="#841584"
+          color="#708090"
           accessibilityLabel="New Game"
           />
       </View>  
