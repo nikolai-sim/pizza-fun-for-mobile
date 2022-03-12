@@ -2,7 +2,7 @@ export function check  (guess , arr , answer) {
   const correct = []
   const answerArr = answer.split('')
   for (let i = 0 ; i < arr.length; i++) {
-    if (guess === arr[i]) {
+    if (guess.toLowerCase() === arr[i]) {
       correct.push(i)
     }
   }
@@ -13,7 +13,7 @@ export function check  (guess , arr , answer) {
   return answerArr.join('')
 }
 
-function checkWin (current, next) {
+export function checkWin (current, next) {
   if( current === next) {
     return true
   }

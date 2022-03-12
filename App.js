@@ -41,20 +41,20 @@ export default function App() {
     }
   }
 
-  const answer = selectWord(words)
-
+  const answer1 = selectWord(words)
+  console.log(answer1)
   let temp = []
-  for (let i=0; i < answer.length ; i++) {
+  for (let i=0; i < answer1.length ; i++) {
     temp.push('_')
   }
   
   const start = temp.join('')
   
-
+  const [answer, setAnswer] = useState(answer1)
   const [board , setBoard] = useState(start)
   const [pastGuess, setPastGuess] = useState('')
   const [box, setBox] = useState('')
-  const [pizza, eatPizza] = useState('./images/7.png')
+  const [pizza, eatPizza] = useState(<Image source={require('./images/7.png')} style={{height: 200, width: 200, margin:25}}/>)
   const [counter, setCounter] = useState(7)
   const [text, setText] = useState('')
 
@@ -109,6 +109,7 @@ export default function App() {
         />
 
       <Text style={{letterSpacing:5, fontSize:32, margin:10}}>{board}</Text>
+      <Text style={{letterSpacing:3, fontSize:18, margin:10}}>{pastGuess}</Text>
       <StatusBar style="auto" />
     </View>
   );
