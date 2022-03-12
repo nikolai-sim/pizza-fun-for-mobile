@@ -91,8 +91,12 @@ export default function App() {
     
   }
 
-  const handleTyping = (evt) => {
-    setBox(evt.target.value)
+  const newGame = () => {
+    setText('')
+    setCounter(7)
+    setBoard(start)
+    setAnswer(answer1)
+    setPastGuess('')
   }
 
   return (
@@ -123,6 +127,12 @@ export default function App() {
         accessibilityLabel={letter}
         />)}
       </View> */}
+      <Button
+        onPress={newGame}
+        title="New Game"
+        color="#841584"
+        accessibilityLabel="New Game"
+        />
       <StatusBar style="auto" />
     </View>
   );
