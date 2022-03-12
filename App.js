@@ -52,7 +52,7 @@ export default function App() {
       setCounter(100)
       setModalVisible(true)
     }
-     
+
   }
 
   const newGame = () => {
