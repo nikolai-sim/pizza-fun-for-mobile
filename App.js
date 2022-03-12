@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput} from 'react-native';
-import {selectWord, check} from './lib'
+import { StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
+import {selectWord, check, checkWin} from './lib'
 import {useState} from 'react'
 
 const words = [["t", "o", "m", "o", "r", "r", "o", "w"],
@@ -61,9 +61,9 @@ export default function App() {
   const handleSubmit = () => {
     
     let newCount
-    const guess = evt.target[0].value
-    const update = lib.check(guess , answer , board)
-    const isWin = lib.checkWin(update, answer.join(''))
+    const guess = text
+    const update = check(guess , answer , board)
+    const isWin = checkWin(update, answer.join(''))
     
     if (update === board) {
       newCount = (counter - 1)
@@ -98,8 +98,17 @@ export default function App() {
         placeholder="Type your guess here!"
         onChangeText={newText => setText(newText)}
         defaultValue={text}
+        maxLength={1}
       />
       {renderImage(counter)}
+      <Button
+        onPress={handleSubmit}
+        title="Submit"
+        color="#841584"
+        accessibilityLabel="submit guess"
+        />
+
+      <Text style={{letterSpacing:5, fontSize:32, margin:10}}>{board}</Text>
       <StatusBar style="auto" />
     </View>
   );
