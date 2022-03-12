@@ -2,7 +2,7 @@ export function check  (guess , arr , answer) {
   const correct = []
   const answerArr = answer.split('')
   for (let i = 0 ; i < arr.length; i++) {
-    if (guess.toLowerCase() === arr[i]) {
+    if (guess === arr[i]) {
       correct.push(i)
     }
   }

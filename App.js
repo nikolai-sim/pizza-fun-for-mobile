@@ -43,6 +43,9 @@ export default function App() {
     }
   }
 
+  const letterArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+  'w', 'x', 'y', 'z']
+
   const answer1 = selectWord(words)
   console.log(answer1)
   let temp = []
@@ -60,7 +63,7 @@ export default function App() {
   const [counter, setCounter] = useState(7)
   const [text, setText] = useState('')
 
-  const handleSubmit = () => {
+  const handleSubmit = (letter) => {
     
     let newCount
     const guess = text
@@ -112,6 +115,14 @@ export default function App() {
 
       <Text style={{letterSpacing:5, fontSize:32, margin:10}}>{board}</Text>
       <Text style={{letterSpacing:3, fontSize:18, margin:10}}>{pastGuess}</Text>
+      {/* <View style={{flexWrap: 'wrap', flex: 10, flexDirection: 'row' }}>
+      {letterArr.map( letter => <Button
+        onPress={() => {handleSubmit(letter.toLowerCase())}}
+        title={letter}
+        color="#841584"
+        accessibilityLabel={letter}
+        />)}
+      </View> */}
       <StatusBar style="auto" />
     </View>
   );
