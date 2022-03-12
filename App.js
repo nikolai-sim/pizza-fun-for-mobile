@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
 import {selectWord, check, checkWin} from './lib'
-import {useState, useEffect} from 'react'
-import { getWords } from './apis/index'
+import { useState } from 'react'
 import { words } from './words'
 import { renderImage } from './components/RenderImage';
 
@@ -29,10 +28,7 @@ export default function App() {
   const [answer, setAnswer] = useState(answer1)
   const [board , setBoard] = useState(start)
   const [pastGuess, setPastGuess] = useState('')
-  const [box, setBox] = useState('')
-  const [pizza, eatPizza] = useState(<Image source={require('./images/7.png')} style={{height: 200, width: 200, margin:25}}/>)
   const [counter, setCounter] = useState(7)
-  const [text, setText] = useState('')
 
   const handleSubmit = (letter) => {
     
@@ -51,20 +47,15 @@ export default function App() {
     
     setBoard(update)
     setPastGuess(pastGuess + " " + guess)
-    setText('')
+
     if (isWin === true) {
       setCounter(100)
       setModalVisible(true)
     }
-    else {
-      eatPizza('./images/' + newCount.toString(10) + ".png")
-    }
-    
-    
+     
   }
 
   const newGame = () => {
-    setText('')
     setCounter(7)
     setBoard(start)
     const newRandWord = selectWord(words)
@@ -93,7 +84,7 @@ export default function App() {
       
 
       {counter === 0 ? <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{answer.join('')}</Text> : <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>}
-     {answer1? <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> : <ActivityIndicator/>}
+      {answer1? <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> : <ActivityIndicator/>}
      
       <FlatList data={letters}
         renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter + index}/>)} 
