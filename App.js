@@ -1,22 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, View, Image, ActivityIndicator, Button, FlatList} from 'react-native';
 import {selectWord, check, checkWin} from './lib'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import { getWords } from './apis/index'
+import { words } from './words'
 
 import LetterButton from './components/LetterButton';
-
-const words = [["t", "o", "m", "o", "r", "r", "o", "w"],
-["y", "e", "s", "t", "e", "r", "d", "a", "y"],
-["o", "r", "a", "n", "g", "e"],
-["h", "i", "j", "i", "n", "k", "s"],
-["s", "w", "e", "a", "t", "e", "r"],
-["s", "t", "r", "a", "w", "b", "e", "r", "r", "y"],
-["a", "n", "g", "e", "l"],
-["s", "u", "c", "c", "e", "s", "s"],
-["l", "i", "v", "i", "d"],
-["m", "o", "n", "s", "t", "e", "r"],
-["z" , "o" , "o", "l", "o", "g","y"],
-["b", "o", "i", "s", "t", "e", "r", "o", "u", "s"]]
 
 export default function App() {
 
@@ -44,16 +33,21 @@ export default function App() {
         return <Image source={require('./images/7.png')} style={{height: 200, width: 200, margin:25}}/>
     }
   }
-
-  const letterArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-  'w', 'x', 'y', 'z']
-
+  
   const letters = [ {letter: 'a'}, {letter: 'b'}, {letter: 'c'}, {letter: 'd'}, {letter: 'e'}, {letter: 'f'}, {letter: 'g'}, {letter: 'h'}, 
   {letter: 'i'}, {letter: 'j'}, {letter: 'k'}, {letter: 'l'}, {letter: 'm'}, {letter: 'n'}, {letter: 'o'}, {letter: 'p'}, {letter: 'q'}, {letter: 'r'},  
   {letter: 's'}, {letter: 't'}, {letter: 'u'}, {letter: 'v'}, {letter: 'w'}, {letter: 'x'}, {letter: 'y'}, {letter: 'z'}]
 
-  const answer1 = selectWord(words)
-  console.log(answer1)
+  const [answer1, setAnswer1] = useState([]) 
+  
+  useEffect(() => {
+    getWords()
+    .then( res => {
+    const randWord = selectWord(res)
+    setAnswer1(randWord.split(''))
+    })
+  }, [])
+
   let temp = []
   for (let i=0; i < answer1.length ; i++) {
     temp.push('_')
@@ -112,11 +106,11 @@ export default function App() {
       {renderImage(counter)}
       </View>
       <Text style={{color:'black', letterSpacing: 3, fontSize: 16}}>PIZZA FUN</Text>
-      <Text>Guess the word</Text>
+      {board? <Text>Guess the word</Text> : <Text> Press New Game to Start </Text>}
       
 
       <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>
-      <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text>
+     {answer1? <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> : <ActivityIndicator/>}
      
       <FlatList data={letters}
         renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter + index}/>)} 
