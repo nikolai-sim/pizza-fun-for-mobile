@@ -72,7 +72,7 @@ export default function App() {
   const handleSubmit = (letter) => {
     
     let newCount
-    const guess = text
+    const guess = letter
     const update = check(guess.toLowerCase() , answer , board)
     const isWin = checkWin(update, answer.join(''))
     
@@ -107,26 +107,26 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{color:'black'}}>Pizza Fun</Text>
-      <TextInput
+      {/* <TextInput
         style={{height: 40}}
         placeholder="Type your guess here!"
         onChangeText={newText => setText(newText)}
         defaultValue={text}
         maxLength={1}
-      />
-      <View style={{backgroundColor: '#FCED61', margin: 15}}>
+      /> */}
+      <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45}}>
       {renderImage(counter)}
       </View>
-      <Button
+      <Text style={{color:'black'}}>Pizza Fun</Text>
+      {/* <Button
         onPress={handleSubmit}
         title="Submit"
         color="#841584"
         accessibilityLabel="submit guess"
-        />
+        /> */}
 
-      <Text style={{letterSpacing:5, fontSize:32, margin:10}}>{board}</Text>
-      <Text style={{letterSpacing:3, fontSize:18, margin:10}}>{pastGuess}</Text>
+      <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>
+      <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text>
       {/* <View style={{flexWrap: 'wrap', flex: 10, flexDirection: 'row' }}>
       {letterArr.map( letter => <Button
         onPress={() => {handleSubmit(letter.toLowerCase())}}
@@ -138,12 +138,14 @@ export default function App() {
       <FlatList data={letters}
         renderItem={({item}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit}/>)} 
         numColumns={9}/>
-      <Button
-        onPress={newGame}
-        title="New Game"
-        color="#841584"
-        accessibilityLabel="New Game"
-        />
+      <View style={{marginBottom: 30}}>
+        <Button
+          onPress={newGame}
+          title="New Game"
+          color="#841584"
+          accessibilityLabel="New Game"
+          />
+      </View>  
       <StatusBar style="auto" />
     </View>
   );
