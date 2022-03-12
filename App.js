@@ -101,7 +101,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Pizza Fun for Mobile</Text>
+      <Text style={{color:'black'}}>Pizza Fun</Text>
       <TextInput
         style={{height: 40}}
         placeholder="Type your guess here!"
@@ -109,7 +109,9 @@ export default function App() {
         defaultValue={text}
         maxLength={1}
       />
+      <View style={{backgroundColor: '#FCED61', margin: 15}}>
       {renderImage(counter)}
+      </View>
       <Button
         onPress={handleSubmit}
         title="Submit"
@@ -141,7 +143,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
     alignItems: 'center',
     justifyContent: 'center',
   },
