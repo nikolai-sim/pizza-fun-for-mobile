@@ -37,16 +37,9 @@ export default function App() {
   const letters = [ {letter: 'a'}, {letter: 'b'}, {letter: 'c'}, {letter: 'd'}, {letter: 'e'}, {letter: 'f'}, {letter: 'g'}, {letter: 'h'}, 
   {letter: 'i'}, {letter: 'j'}, {letter: 'k'}, {letter: 'l'}, {letter: 'm'}, {letter: 'n'}, {letter: 'o'}, {letter: 'p'}, {letter: 'q'}, {letter: 'r'},  
   {letter: 's'}, {letter: 't'}, {letter: 'u'}, {letter: 'v'}, {letter: 'w'}, {letter: 'x'}, {letter: 'y'}, {letter: 'z'}]
-
-  const [answer1, setAnswer1] = useState([]) 
   
-  useEffect(() => {
-    getWords()
-    .then( res => {
-    const randWord = selectWord(res)
-    setAnswer1(randWord.split(''))
-    })
-  }, [])
+    const randWord = selectWord(words)
+    let answer1 = (randWord.split(''))
 
   let temp = []
   for (let i=0; i < answer1.length ; i++) {
@@ -95,7 +88,9 @@ export default function App() {
     setText('')
     setCounter(7)
     setBoard(start)
-    setAnswer(answer1)
+    const newRandWord = selectWord(words)
+    let answer2 = newRandWord.split('')
+    setAnswer(answer2)
     setPastGuess('')
   }
 
