@@ -33,9 +33,11 @@ export default function App() {
       case 2 :
         return <Image source={require('./images/2.png')} style={{height: 200, width: 200, margin:25}}/>
       case 1 :
-          return <Image source={require('./images/1.png')} style={{height: 200, width: 200, margin:25}}/>
+        return <Image source={require('./images/1.png')} style={{height: 200, width: 200, margin:25}}/>
       case 0 :
-          return <Image source={require('./images/0.png')} style={{height: 200, width: 200, margin:25}}/>
+        return <Image source={require('./images/0.png')} style={{height: 200, width: 200, margin:25}}/>
+      case 100 :
+        return <Image source={require('./images/win.png')} style={{height: 200, width: 200, margin:25}}/>
       default:
         return <Image source={require('./images/7.png')} style={{height: 200, width: 200, margin:25}}/>
     }
@@ -77,7 +79,7 @@ export default function App() {
     setPastGuess(pastGuess + " " + guess)
     setBox('')
     if (isWin === true) {
-      eatPizza('./images/win.png')
+      setCounter(100)
     }
     else {
       eatPizza('./images/' + newCount.toString(10) + ".png")
