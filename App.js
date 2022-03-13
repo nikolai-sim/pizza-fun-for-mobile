@@ -13,20 +13,10 @@ export default function App() {
   {letter: 'i'}, {letter: 'j'}, {letter: 'k'}, {letter: 'l'}, {letter: 'm'}, {letter: 'n'}, {letter: 'o'}, {letter: 'p'}, {letter: 'q'}, {letter: 'r'},  
   {letter: 's'}, {letter: 't'}, {letter: 'u'}, {letter: 'v'}, {letter: 'w'}, {letter: 'x'}, {letter: 'y'}, {letter: 'z'}]
   
-  const randWord = selectWord(words)
-  let answer1 = (randWord.split(''))
-
-  let temp = []
-  for (let i=0; i < answer1.length ; i++) {
-    temp.push('_')
-  }
-  
-  const start = temp.join('')
-
   const [modalVisible, setModalVisible] = useState(false)
   
-  const [answer, setAnswer] = useState(answer1)
-  const [board , setBoard] = useState(start)
+  const [answer, setAnswer] = useState('')
+  const [board , setBoard] = useState('')
   const [pastGuess, setPastGuess] = useState('')
   const [counter, setCounter] = useState(7)
 
@@ -57,10 +47,14 @@ export default function App() {
 
   const newGame = () => {
     setCounter(7)
-    setBoard(start)
     const newRandWord = selectWord(words)
     let answer2 = newRandWord.split('')
     setAnswer(answer2)
+    let temp = []
+    for (let i=0; i < answer2.length ; i++) {
+    temp.push('_')
+    }
+    setBoard(temp.join(''))
     setPastGuess('')
   }
 
@@ -84,7 +78,7 @@ export default function App() {
       
 
       {counter === 0 ? <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{answer.join('')}</Text> : <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>}
-      {answer1? <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> : <ActivityIndicator/>}
+      <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text>
      
       <FlatList data={letters}
         renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter}/>)} 
