@@ -87,7 +87,7 @@ export default function App() {
       {answer1? <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> : <ActivityIndicator/>}
      
       <FlatList data={letters}
-        renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter + index}/>)} 
+        renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter}/>)} 
         numColumns={9}/>
       <View style={{marginBottom: 30}}>
         <Button
