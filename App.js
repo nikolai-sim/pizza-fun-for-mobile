@@ -60,16 +60,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      ></Modal> */}
-      
       <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45}}>
         {renderImage(counter)}
       </View>
