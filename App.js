@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
 import {selectWord, check, checkWin} from './lib'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
 import { renderImage } from './components/RenderImage';
 
 import LetterButton from './components/LetterButton';
+
 
 export default function App() {
 
@@ -19,6 +20,8 @@ export default function App() {
   const [board , setBoard] = useState('')
   const [pastGuess, setPastGuess] = useState('')
   const [counter, setCounter] = useState(7)
+  
+  const reEnableButton = useRef(null)
 
   const handleSubmit = (letter) => {
     
@@ -40,7 +43,6 @@ export default function App() {
 
     if (isWin === true) {
       setCounter(100)
-      setModalVisible(true)
     }
 
   }
@@ -56,7 +58,13 @@ export default function App() {
     }
     setBoard(temp.join(''))
     setPastGuess('')
+    reEnableButton.current()
   }
+
+  useEffect(() => {
+    newGame()
+  }, [])
+
 
   return (
     <View style={styles.container}>
@@ -71,7 +79,7 @@ export default function App() {
       <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text>
      
       <FlatList data={letters}
-        renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter}/>)} 
+        renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter} reEnableButton={reEnableButton}/>)} 
         numColumns={9}/>
       <View style={{marginBottom: 30}}>
         <Button
