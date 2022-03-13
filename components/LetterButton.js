@@ -6,7 +6,7 @@ export default function LetterButton ({letter, handleSubmit, reEnableButton}) {
   const [isDisabled, setIsDisabled] = useState(false)
 
   useEffect( () => {
-    reEnableButton.current = handleNewGame
+    reEnableButton.current.push(handleNewGame)
     
   }, [])
 
@@ -27,7 +27,7 @@ export default function LetterButton ({letter, handleSubmit, reEnableButton}) {
             color="#708090"
             accessibilityLabel={letter}
             key={letter + Math.random() * 10}
-
+            disabled={isDisabled}
             />
     </View>
     
