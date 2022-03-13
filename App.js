@@ -18,7 +18,6 @@ export default function App() {
   
   const [answer, setAnswer] = useState('')
   const [board , setBoard] = useState('')
-  const [pastGuess, setPastGuess] = useState('')
   const [counter, setCounter] = useState(7)
   
   const reEnableButton = useRef([])
@@ -39,7 +38,6 @@ export default function App() {
     setCounter(newCount)
     
     setBoard(update)
-    setPastGuess(pastGuess + " " + guess)
 
     if (isWin === true) {
       setCounter(100)
@@ -57,7 +55,6 @@ export default function App() {
     temp.push('_')
     }
     setBoard(temp.join(''))
-    setPastGuess('')
     reEnableButton.current.forEach(func => func())
   }
 
@@ -76,7 +73,6 @@ export default function App() {
       
 
       {counter === 0 ? <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{answer.join('')}</Text> : <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>}
-      {/* <Text style={{letterSpacing:3, fontSize:18, margin:5}}>{pastGuess}</Text> */}
      
       <FlatList data={letters}
         renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter} reEnableButton={reEnableButton}/>)} 
