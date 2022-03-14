@@ -65,7 +65,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45}}>
+      <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45, borderRadius:25}}>
         {renderImage(counter)}
       </View>
       <Text style={{color:'black', letterSpacing: 3, fontSize: 16}}>PIZZA FUN</Text>
