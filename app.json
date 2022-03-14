@@ -3,7 +3,7 @@
     "name": "pizza fun",
     "slug": "pizza-fun",
     "description": "Basically hangman but with pizza because capital punishment is gross",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
