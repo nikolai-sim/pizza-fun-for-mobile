@@ -26,7 +26,7 @@ export default function App() {
     
     let newCount
     const guess = letter
-    const update = check(guess.toLowerCase() , answer , board)
+    const update = check(letter.toLowerCase() , answer , board)
     const isWin = checkWin(update, answer.join(''))
     
     if (update === board) {
@@ -49,7 +49,7 @@ export default function App() {
     setCounter(7)
     const answer2 = selectWord(words).split('')
     setAnswer(answer2)
-    let temp = []
+    const temp = []
     for (let i=0; i < answer2.length ; i++) {
     temp.push('_')
     }
