@@ -47,8 +47,7 @@ export default function App() {
 
   const newGame = () => {
     setCounter(7)
-    const newRandWord = selectWord(words)
-    let answer2 = newRandWord.split('')
+    const answer2 = selectWord(words).split('')
     setAnswer(answer2)
     let temp = []
     for (let i=0; i < answer2.length ; i++) {
