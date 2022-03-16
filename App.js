@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
-import {selectWord, check, checkWin} from './lib'
+import {selectWord, check, checkWin, letters} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
 import { renderImage } from './components/RenderImage';
@@ -10,12 +10,6 @@ import LetterButton from './components/LetterButton';
 
 export default function App() {
 
-  const letters = [ {letter: 'a'}, {letter: 'b'}, {letter: 'c'}, {letter: 'd'}, {letter: 'e'}, {letter: 'f'}, {letter: 'g'}, {letter: 'h'}, 
-  {letter: 'i'}, {letter: 'j'}, {letter: 'k'}, {letter: 'l'}, {letter: 'm'}, {letter: 'n'}, {letter: 'o'}, {letter: 'p'}, {letter: 'q'}, {letter: 'r'},  
-  {letter: 's'}, {letter: 't'}, {letter: 'u'}, {letter: 'v'}, {letter: 'w'}, {letter: 'x'}, {letter: 'y'}, {letter: 'z'}]
-  
-  const [modalVisible, setModalVisible] = useState(false)
-  
   const [answer, setAnswer] = useState('')
   const [board , setBoard] = useState('')
   const [counter, setCounter] = useState(7)
@@ -25,7 +19,6 @@ export default function App() {
   const handleSubmit = (letter) => {
     
     let newCount
-    const guess = letter
     const update = check(letter.toLowerCase() , answer , board)
     const isWin = checkWin(update, answer.join(''))
     
