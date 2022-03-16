@@ -57,17 +57,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={{backgroundColor: '#FCED61', margin: 15, marginTop: 45, borderRadius:25}}>
+      <View style={styles.imageBackGround}>
         {renderImage(counter)}
       </View>
-      <Text style={{color:'black', letterSpacing: 3, fontSize: 16}}>PIZZA FUN</Text>
+      <Text style={styles.title}>PIZZA FUN</Text>
       {board? <Text>Guess the word</Text> : <Text> Press New Game to Start </Text>}
       
-
-      {counter === 0 ? <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{answer.join('')}</Text> : <Text style={{letterSpacing:5, fontSize:32, margin:5}}>{board}</Text>}
-     
+      {counter === 0 ? <Text style={styles.board}>{answer.join('')}</Text> : <Text style={styles.board}>{board}</Text>}
       <FlatList data={letters}
-        renderItem={({item, index}) => (<LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter} reEnableButton={reEnableButton}/>)} 
+        renderItem={({item, index}) => (
+        <LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter} reEnableButton={reEnableButton}/>)} 
         numColumns={9}/>
       <View style={{marginBottom: 30}}>
         <Button
@@ -88,5 +87,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  imageBackGround: {
+    backgroundColor: '#FCED61', 
+    margin: 15, 
+    marginTop: 45, 
+    borderRadius:25
+  },
+  title: {
+    color:'black', 
+    letterSpacing: 3, 
+    fontSize: 16
+  },
+  board: {
+    letterSpacing:5, 
+    fontSize:32, 
+    margin:5
   },
 });
