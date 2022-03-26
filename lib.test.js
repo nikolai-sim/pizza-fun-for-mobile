@@ -22,3 +22,20 @@ test('the update stats function updates the statistic correctly for a win that i
   const actual = lib.updateStats(currentStats, 'win')
   expect(actual).toEqual(expected)
 })
+
+test('the update stats function updates the statistic correctly for a win that does not increse the streak' , () => {
+  const currentStats = {
+    wins : 10,
+    losses : 3,
+    currentStreak: 3,
+    bestStreak: 6,
+  }
+  const expected = {
+    wins : 11,
+    losses : 3,
+    currentStreak: 4,
+    bestStreak: 6,
+  }
+  const actual = lib.updateStats(currentStats, 'win')
+  expect(actual).toEqual(expected)
+})
