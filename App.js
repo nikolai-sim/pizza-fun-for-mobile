@@ -23,6 +23,7 @@ export default function App() {
   const [counter, setCounter] = useState(7)
   const [stats, setStats] = useState(defaultStats)
   const [modalVisible, setModalVisible] = useState(true)
+  const [result, setResult] = useState('')
   
   const reEnableButton = useRef([])
   const disableAllButtons = useRef([])
@@ -48,16 +49,18 @@ export default function App() {
     setBoard(update)
 
     if (isWin === true) {
+      setResult('win')
       setCounter(100)
       disableCall()
-      setStats(updateStats(stats, 'win'))
+      setStats(updateStats(stats, result))
       storeData(stats)
       setModalVisible(true)
     }
 
     if (newCount === 0) {
+      setResult('lose')
       disableCall()
-      setStats(updateStats(stats, 'lose'))
+      setStats(updateStats(stats, result))
       storeData(stats)
       setModalVisible(true)
     }
