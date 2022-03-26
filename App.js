@@ -25,6 +25,7 @@ export default function App() {
   const [isLost, setIsLost] = useState(false)
   
   const reEnableButton = useRef([])
+  const disableAllButtons = useRef([])
 
   const handleSubmit = (letter) => {
     
@@ -44,6 +45,10 @@ export default function App() {
 
     if (isWin === true) {
       setCounter(100)
+    }
+
+    if (newCount === 0) {
+      disableAllButtons.current.forEach(func => func())
     }
 
   }
@@ -88,7 +93,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.imageBackGround}>
-        {renderImage(counter , setIsLost)}
+        {renderImage(counter)}
       </View>
       <Text style={styles.title}>PIZZA FUN</Text>
       {board? <Text>Guess the word</Text> : <Text> Press New Game to Start </Text>}
@@ -96,7 +101,12 @@ export default function App() {
       {counter === 0 ? <Text style={styles.board}>{answer.join('')}</Text> : <Text style={styles.board}>{board}</Text>}
       <FlatList data={letters}
         renderItem={({item, index}) => (
-        <LetterButton letter={item.letter} handleSubmit={handleSubmit} key={item.letter} reEnableButton={reEnableButton}/>)} 
+        <LetterButton 
+        letter={item.letter} 
+        handleSubmit={handleSubmit} 
+        key={item.letter} 
+        reEnableButton={reEnableButton}
+        disableAllButtons={disableAllButtons}/>)} 
         numColumns={9}/>
       <View style={{marginBottom: 30}}>
         <Button

@@ -1,13 +1,13 @@
 import { Button, View } from 'react-native'
 import { useEffect, useState} from 'react'
 
-export default function LetterButton ({letter, handleSubmit, reEnableButton}) {
+export default function LetterButton ({letter, handleSubmit, reEnableButton, disableAllButtons}) {
 
   const [isDisabled, setIsDisabled] = useState(false)
 
   useEffect( () => {
     reEnableButton.current.push(handleNewGame)
-    
+    disableAllButtons.current.push(disable)
   }, [])
 
   const handleNewGame = () => {
@@ -16,6 +16,10 @@ export default function LetterButton ({letter, handleSubmit, reEnableButton}) {
 
   const handlePress = () => {
     handleSubmit(letter.toLowerCase())
+    setIsDisabled(true)
+  }
+
+  const disable = () => {
     setIsDisabled(true)
   }
 
