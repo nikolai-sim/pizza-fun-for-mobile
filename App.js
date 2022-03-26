@@ -10,11 +10,18 @@ import LetterButton from './components/LetterButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
+  
+  const defaultStats = {
+    wins : 0,
+    losses : 0,
+    currentStreak: 0,
+    bestStreak: 0,
+  }
 
   const [answer, setAnswer] = useState('')
   const [board , setBoard] = useState('')
   const [counter, setCounter] = useState(7)
-  const [stats, setStats] = useState({})
+  const [stats, setStats] = useState(defaultStats)
   
   const reEnableButton = useRef([])
 
