@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
+import { StyleSheet, Text, View, Pressable, Button, FlatList, Modal} from 'react-native';
 import {selectWord, check, checkWin, letters, updateStats} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
@@ -22,6 +22,7 @@ export default function App() {
   const [board , setBoard] = useState('')
   const [counter, setCounter] = useState(7)
   const [stats, setStats] = useState(defaultStats)
+  const [modalVisible, setModalVisible] = useState(true)
   
   const reEnableButton = useRef([])
   const disableAllButtons = useRef([])
@@ -51,12 +52,14 @@ export default function App() {
       disableCall()
       setStats(updateStats(stats, 'win'))
       storeData(stats)
+      setModalVisible(true)
     }
 
     if (newCount === 0) {
       disableCall()
       setStats(updateStats(stats, 'lose'))
       storeData(stats)
+      setModalVisible(true)
     }
 
   }
@@ -99,6 +102,29 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+       <View style={styles.centeredView}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Hello World!</Text>
+              <Button
+              onPress={() => {setModalVisible(false)}}
+              title="Go Back"
+              color="#708090"
+              accessibilityLabel="Go Back"
+              />
+            </View>
+          </View>
+        </Modal>
+        </View>
       <View style={styles.imageBackGround}>
         {renderImage(counter)}
       </View>
@@ -151,4 +177,29 @@ const styles = StyleSheet.create({
     fontSize:32, 
     margin:5
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });
