@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, ActivityIndicator, Button, FlatList, Modal} fro
 import {selectWord, check, checkWin, letters} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
-import { renderImage } from './components/RenderImage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LetterButton from './components/LetterButton';
+import { renderImage } from './components/RenderImage';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
   
@@ -22,6 +22,7 @@ export default function App() {
   const [board , setBoard] = useState('')
   const [counter, setCounter] = useState(7)
   const [stats, setStats] = useState(defaultStats)
+  const [isLost, setIsLost] = useState(false)
   
   const reEnableButton = useRef([])
 
@@ -57,6 +58,7 @@ export default function App() {
     }
     setBoard(temp.join(''))
     reEnableButton.current.forEach(func => func())
+    setIsLost(false)
   }
 
   useEffect(() => {
@@ -86,7 +88,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.imageBackGround}>
-        {renderImage(counter)}
+        {renderImage(counter , setIsLost)}
       </View>
       <Text style={styles.title}>PIZZA FUN</Text>
       {board? <Text>Guess the word</Text> : <Text> Press New Game to Start </Text>}

@@ -1,9 +1,9 @@
 import { Image } from 'react-native'
 
-export const renderImage = (count) => {
+export const renderImage = (count , setIsLost) => {
   switch(count) {
     case 7 :
-      return <Image source={require('../images/7.png')} style={{height: 200, width: 200, margin:25}}/>
+      return <Image source={require(`../images/${count}.png`)} style={{height: 200, width: 200, margin:25}}/>
     case 6 :
       return <Image source={require('../images/6.png')} style={{height: 200, width: 200, margin:25}}/>
     case 5 :
@@ -17,6 +17,7 @@ export const renderImage = (count) => {
     case 1 :
       return <Image source={require('../images/1.png')} style={{height: 200, width: 200, margin:25}}/>
     case 0 :
+      setIsLost(true)
       return <Image source={require('../images/0.png')} style={{height: 200, width: 200, margin:25}}/>
     case 100 :
       return <Image source={require('../images/win.png')} style={{height: 200, width: 200, margin:25}}/>
