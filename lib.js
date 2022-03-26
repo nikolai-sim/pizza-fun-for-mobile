@@ -27,6 +27,28 @@ export function selectWord (arr) {
   return arr[i]
 }
 
+export function updateStats (currentStats, result) {
+  let newStats = {}
+  if (result === 'win') {
+    newStats.wins = currentStats.wins + 1
+    newStats.losses = currentStats.losses
+    newStats.currentStreak = currentStats.currentStreak + 1
+    if (newStats.currentStreak > currentStats.bestStreak) {
+      newStats.bestStreak = newStats.currentStreak
+    }
+    else {
+      newStats.bestStreak = currentStats.bestStreak
+    }
+  }
+  else if (result === 'lose') {
+    newStats.wins = currentStats.wins
+    newStats.losses = currentStats.losses + 1
+    newStats.currentStreak = 0
+    newStats.bestStreak = currentStats.bestStreak
+  }
+  return newStats
+}
+
 export const letters = [ 
   {letter: 'a'}, 
   {letter: 'b'},
