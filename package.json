@@ -19,7 +19,8 @@
     "react-native": "0.64.3",
     "react-native-web": "0.17.1",
     "superagent": "^7.1.1",
-    "expo-updates": "~0.11.6"
+    "expo-updates": "~0.11.6",
+    "@react-native-async-storage/async-storage": "~1.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -7,12 +7,14 @@ import { renderImage } from './components/RenderImage';
 
 import LetterButton from './components/LetterButton';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
 
   const [answer, setAnswer] = useState('')
   const [board , setBoard] = useState('')
   const [counter, setCounter] = useState(7)
+  const [stats, setStats] = useState({})
   
   const reEnableButton = useRef([])
 
@@ -44,7 +46,7 @@ export default function App() {
     setAnswer(answer2)
     const temp = []
     for (let i=0; i < answer2.length ; i++) {
-    temp.push('_')
+      temp.push('_')
     }
     setBoard(temp.join(''))
     reEnableButton.current.forEach(func => func())
@@ -52,7 +54,26 @@ export default function App() {
 
   useEffect(() => {
     newGame()
+    getData()
   }, [])
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('stats', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('stats')
+      return jsonValue != null ? setStats(JSON.parse(jsonValue)) : null;
+    } catch(e) {
+      // error reading value
+    }
+  }
 
 
   return (
