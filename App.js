@@ -23,7 +23,7 @@ export default function App() {
   const [counter, setCounter] = useState(7)
   const [stats, setStats] = useState(defaultStats)
   const [modalVisible, setModalVisible] = useState(true)
-  const [result, setResult] = useState('')
+  const [result, setResult] = useState('win')
   
   const reEnableButton = useRef([])
   const disableAllButtons = useRef([])
@@ -52,7 +52,7 @@ export default function App() {
       setResult('win')
       setCounter(100)
       disableCall()
-      setStats(updateStats(stats, result))
+      setStats(updateStats(stats, 'win'))
       storeData(stats)
       setModalVisible(true)
     }
@@ -60,7 +60,7 @@ export default function App() {
     if (newCount === 0) {
       setResult('lose')
       disableCall()
-      setStats(updateStats(stats, result))
+      setStats(updateStats(stats, 'lose'))
       storeData(stats)
       setModalVisible(true)
     }
@@ -77,6 +77,7 @@ export default function App() {
     }
     setBoard(temp.join(''))
     reEnableButton.current.forEach(func => func())
+    console.log(stats)
   }
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export default function App() {
       const jsonValue = JSON.stringify(value)
       await AsyncStorage.setItem('stats', jsonValue)
     } catch (e) {
-      // saving error
+      console.log(e)
     }
   }
 
@@ -98,7 +99,7 @@ export default function App() {
       const jsonValue = await AsyncStorage.getItem('stats')
       return jsonValue != null ? setStats(JSON.parse(jsonValue)) : null;
     } catch(e) {
-      // error reading value
+      console.log(e)
     }
   }
 
@@ -117,7 +118,11 @@ export default function App() {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              <Text style={styles.title}>You {result}</Text>
+              <Text style={styles.modalText}>Wins: {stats.wins}</Text>
+              <Text style={styles.modalText}>Loses: {stats.losses}</Text>
+              <Text style={styles.modalText}>Current Streak: {stats.currentStreak}</Text>
+              <Text style={styles.modalText}>Best Streak: {stats.bestStreak}</Text>
               <Button
               onPress={() => {setModalVisible(false)}}
               title="Go Back"
@@ -173,7 +178,8 @@ const styles = StyleSheet.create({
   title: {
     color:'black', 
     letterSpacing: 3, 
-    fontSize: 16
+    fontSize: 16,
+    marginBottom: 15
   },
   board: {
     letterSpacing:5, 
