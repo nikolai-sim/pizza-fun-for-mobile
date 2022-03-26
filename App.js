@@ -54,7 +54,9 @@ export default function App() {
       disableCall()
       setStats(updateStats(stats, 'win'))
       storeData(stats)
-      setModalVisible(true)
+      setTimeout(() => {
+        setModalVisible(true)
+      }, 1000)
     }
 
     if (newCount === 0) {
@@ -62,7 +64,9 @@ export default function App() {
       disableCall()
       setStats(updateStats(stats, 'lose'))
       storeData(stats)
-      setModalVisible(true)
+      setTimeout(() => {
+        setModalVisible(true)
+      }, 1000)
     }
 
   }
@@ -179,7 +183,6 @@ const styles = StyleSheet.create({
     color:'black', 
     letterSpacing: 3, 
     fontSize: 16,
-    marginBottom: 15
   },
   board: {
     letterSpacing:5, 
