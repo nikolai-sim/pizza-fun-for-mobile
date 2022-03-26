@@ -27,6 +27,10 @@ export default function App() {
   const reEnableButton = useRef([])
   const disableAllButtons = useRef([])
 
+  const disableCall = () => {
+    disableAllButtons.current.forEach(func => func())
+  }
+
   const handleSubmit = (letter) => {
     
     let newCount
@@ -45,10 +49,11 @@ export default function App() {
 
     if (isWin === true) {
       setCounter(100)
+      disableCall()
     }
 
     if (newCount === 0) {
-      disableAllButtons.current.forEach(func => func())
+      disableCall()
     }
 
   }
