@@ -22,7 +22,6 @@ export default function App() {
   const [board , setBoard] = useState('')
   const [counter, setCounter] = useState(7)
   const [stats, setStats] = useState(defaultStats)
-  const [isLost, setIsLost] = useState(false)
   
   const reEnableButton = useRef([])
   const disableAllButtons = useRef([])
@@ -68,7 +67,6 @@ export default function App() {
     }
     setBoard(temp.join(''))
     reEnableButton.current.forEach(func => func())
-    setIsLost(false)
   }
 
   useEffect(() => {
