@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ActivityIndicator, Button, FlatList, Modal} from 'react-native';
-import {selectWord, check, checkWin, letters} from './lib'
+import {selectWord, check, checkWin, letters, updateStats} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -49,10 +49,14 @@ export default function App() {
     if (isWin === true) {
       setCounter(100)
       disableCall()
+      setStats(updateStats(stats, 'win'))
+      storeData(stats)
     }
 
     if (newCount === 0) {
       disableCall()
+      setStats(updateStats(stats, 'lose'))
+      storeData(stats)
     }
 
   }
