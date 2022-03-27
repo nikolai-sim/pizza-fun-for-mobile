@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, Button, FlatList, Modal} from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList, Modal} from 'react-native';
 import {selectWord, check, checkWin, letters, updateStats} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
@@ -54,9 +54,7 @@ export default function App() {
       disableCall()
       setStats(updateStats(stats, 'win'))
       storeData(stats)
-      setTimeout(() => {
-        setModalVisible(true)
-      }, 1000)
+      setModalVisible(true)
     }
 
     if (newCount === 0) {
@@ -64,9 +62,7 @@ export default function App() {
       disableCall()
       setStats(updateStats(stats, 'lose'))
       storeData(stats)
-      setTimeout(() => {
-        setModalVisible(true)
-      }, 1000)
+      setModalVisible(true)
     }
 
   }
@@ -81,6 +77,7 @@ export default function App() {
     }
     setBoard(temp.join(''))
     reEnableButton.current.forEach(func => func())
+    setModalVisible(false)
     console.log(stats)
   }
 
@@ -112,7 +109,7 @@ export default function App() {
     <View style={styles.container}>
        <View style={styles.centeredView}>
         <Modal
-          animationType="fade"
+          animationType="slide"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -122,16 +119,22 @@ export default function App() {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
+              <View style={styles.imageBackGround}>
+                {result === 'win' ? 
+                <Image source={require('./images/win.png')} style={{height: 200, width: 200, margin:25}}/> :
+                <Image source={require('./images/0.png')} style={{height: 200, width: 200, margin:25}}/>}
+              </View>
               <Text style={styles.title}>You {result}</Text>
+              <Text style={styles.board}>{answer.join('')}</Text>
               <Text style={styles.modalText}>Wins: {stats.wins}</Text>
               <Text style={styles.modalText}>Loses: {stats.losses}</Text>
               <Text style={styles.modalText}>Current Streak: {stats.currentStreak}</Text>
               <Text style={styles.modalText}>Best Streak: {stats.bestStreak}</Text>
               <Button
-              onPress={() => {setModalVisible(false)}}
-              title="Go Back"
+              onPress={() => {newGame()}}
+              title="New Game"
               color="#708090"
-              accessibilityLabel="Go Back"
+              accessibilityLabel="New Game"
               />
             </View>
           </View>
@@ -193,11 +196,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
+    backgroundColor: '#708090'
   },
   modalView: {
+    minWidth: 370,
+    minHeight: 295,
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#f5f5f5",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
