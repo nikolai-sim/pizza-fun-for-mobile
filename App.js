@@ -110,7 +110,7 @@ export default function App() {
        <View style={styles.centeredView}>
         <Modal
           animationType="slide"
-          transparent={true}
+          transparent={false}
           visible={modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
@@ -125,7 +125,7 @@ export default function App() {
                 <Image source={require('./images/0.png')} style={{height: 200, width: 200, margin:25}}/>}
               </View>
               <Text style={styles.title}>You {result}</Text>
-              <Text style={styles.board}>{answer.join('')}</Text>
+              <Text style={styles.board}>{answer}</Text>
               <Text style={styles.modalText}>Wins: {stats.wins}</Text>
               <Text style={styles.modalText}>Loses: {stats.losses}</Text>
               <Text style={styles.modalText}>Current Streak: {stats.currentStreak}</Text>
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     minWidth: 370,
-    minHeight: 295,
+    minHeight: 730,
     margin: 20,
     backgroundColor: "#f5f5f5",
     borderRadius: 20,
