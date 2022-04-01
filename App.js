@@ -155,10 +155,12 @@ export default function App() {
         <LetterButton 
         letter={item.letter} 
         handleSubmit={handleSubmit} 
-        key={item.letter} 
         reEnableButton={reEnableButton}
         disableAllButtons={disableAllButtons}/>)} 
-        numColumns={9}/>
+        numColumns={9}
+        keyExtractor={(item, index) => {
+           return item.letter + index
+        }}/>
       <View style={{marginBottom: 30}}>
         <Button
           onPress={newGame}
