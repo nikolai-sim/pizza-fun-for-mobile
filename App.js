@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Button, FlatList, Modal} from 'react-native';
-import {selectWord, check, checkWin, letters, updateStats} from './lib'
+import {selectWord, check, checkWin, letters, updateStats, endStatements} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,6 +24,7 @@ export default function App() {
   const [stats, setStats] = useState(defaultStats)
   const [modalVisible, setModalVisible] = useState(true)
   const [result, setResult] = useState('win')
+  const [finalCount, setFinalCount] = useState(null)
   
   const reEnableButton = useRef([])
   const disableAllButtons = useRef([])
@@ -50,6 +51,7 @@ export default function App() {
 
     if (isWin === true) {
       setResult('win')
+      setFinalCount(counter)
       setCounter(100)
       disableCall()
       setStats(updateStats(stats, 'win'))
@@ -58,6 +60,7 @@ export default function App() {
     }
 
     if (newCount === 0) {
+      setFinalCount(0)
       setResult('lose')
       disableCall()
       setStats(updateStats(stats, 'lose'))
@@ -124,7 +127,7 @@ export default function App() {
                 <Image source={require('./images/win.png')} style={{height: 200, width: 200, margin:25}}/> :
                 <Image source={require('./images/0.png')} style={{height: 200, width: 200, margin:25}}/>}
               </View>
-              <Text style={styles.title}>You {result}</Text>
+              <Text style={styles.title}>{endStatements(finalCount)}</Text>
               <Text style={styles.board}>{answer}</Text>
               <Text style={styles.modalText}>Wins: {stats.wins}</Text>
               <Text style={styles.modalText}>Loses: {stats.losses}</Text>

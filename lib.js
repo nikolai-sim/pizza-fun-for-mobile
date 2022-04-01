@@ -49,6 +49,27 @@ export function updateStats (currentStats, result) {
   return newStats
 }
 
+export function endStatements (count) {
+  switch (count) {
+    case 7 : 
+      return 'Perfect!' 
+    case 6 : 
+      return 'Amazing!'
+    case 5 : 
+      return 'Great!'
+    case 4 :
+      return 'Nice!'
+    case 3 : 
+      return 'You got it!'
+    case 2 :
+      return 'Phew!'
+    case 1: 
+      return 'Close one...'
+    case 0: 
+      return 'Better luck next time... '
+  }
+}
+
 export const letters = [ 
   {letter: 'a'}, 
   {letter: 'b'},
