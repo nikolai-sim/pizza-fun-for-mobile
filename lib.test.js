@@ -56,3 +56,15 @@ test('the update stats function updates the statistic correctly for a loss' , ()
   const actual = lib.updateStats(currentStats, 'lose')
   expect(actual).toEqual(expected)
 })
+
+test('the statement returned when you have a perfect game is `Perfect!`' , () => {
+  const expected = 'Perfect!'
+  const actual = lib.endStatements(7)
+  expect(actual).toBe(expected)
+})
+
+test('the statement returned when you lose a game is `Better luck next time...`' , () => {
+  const expected = 'Better luck next time...'
+  const actual = lib.endStatements(0)
+  expect(actual).toBe(expected)
+})

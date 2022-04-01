@@ -66,7 +66,7 @@ export function endStatements (count) {
     case 1: 
       return 'Close one...'
     case 0: 
-      return 'Better luck next time... '
+      return 'Better luck next time...'
   }
 }
 
