@@ -113,7 +113,7 @@ export default function App() {
        <View style={styles.centeredView}>
         <Modal
           animationType="slide"
-          transparent={false}
+          transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
@@ -200,11 +200,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    backgroundColor: '#708090'
   },
   modalView: {
     minWidth: 370,
-    minHeight: 730,
+    minHeight: 780,
     margin: 20,
     backgroundColor: "#f5f5f5",
     borderRadius: 20,
