@@ -81,7 +81,6 @@ export default function App() {
     setBoard(temp.join(''))
     reEnableButton.current.forEach(func => func())
     setModalVisible(false)
-    console.log(stats)
   }
 
   useEffect(() => {
