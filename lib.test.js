@@ -1,4 +1,5 @@
 const lib = require('./lib')
+const {words} = require('./words')
 
 test('the check function returns pizza when that is the answer' , () => {
   const expected = "pizza"
@@ -67,4 +68,10 @@ test('the statement returned when you lose a game is `Better luck next time...`'
   const expected = 'Better luck next time...'
   const actual = lib.endStatements(0)
   expect(actual).toBe(expected)
+})
+
+test( 'selectWord returns a different word when called twice' , () => {
+  const wordOne = lib.selectWord(words)
+  const wordTwo = lib.selectWord(words)
+  expect(wordOne).not.toBe(wordTwo)
 })

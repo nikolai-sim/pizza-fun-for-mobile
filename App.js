@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button, FlatList, Modal} from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList, Modal } from 'react-native';
 import {selectWord, check, checkWin, letters, updateStats, endStatements} from './lib'
 import { useState, useRef, useEffect } from 'react'
 import { words } from './words'
